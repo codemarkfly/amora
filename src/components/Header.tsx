@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Sparkles } from "lucide-react"
+import { Menu, X, Sparkles, Moon } from "lucide-react"
 
 const navLinks = [
   { name: "Jornadas", href: "#jornadas" },
@@ -40,7 +40,7 @@ export default function Header() {
             <div className="relative w-8 h-8 sm:w-10 sm:h-10">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-blue-500 to-teal-400 rounded-xl rotate-45 group-hover:rotate-[135deg] transition-all duration-700" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
             </div>
             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 bg-clip-text text-transparent">

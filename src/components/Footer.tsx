@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Sparkles, Heart, Instagram, Youtube, Twitter, Github, Mail } from "lucide-react"
+import { Moon, Heart, Instagram, Youtube, Twitter, Github, Mail } from "lucide-react"
 
 const footerLinks = {
   explorar: [
@@ -49,7 +49,7 @@ export default function Footer() {
                 <div className="relative w-10 h-10">
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-blue-500 to-teal-400 rounded-xl rotate-45" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
+                    <Moon className="w-5 h-5 text-white" />
                   </div>
                 </div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-teal-400 bg-clip-text text-transparent">
