@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMORA — Descubra habilidades. Crie objetivos. Evolua com inteligência artificial.</title>
+<meta name="description" content="A AMORA conecta criatividade, aprendizado e IA para ajudar pessoas a desenvolverem novas habilidades no seu próprio ritmo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple-50:#faf8ff;--purple-100:#f0edff;--purple-200:#e0d9ff;--purple-300:#c7b8ff;--purple-400:#a88eff;--purple-500:#8b5cf6;--purple-600:#7c3aed;--purple-700:#6d28d9;
+  --blue-50:#f0f9ff;--blue-100:#dff2ff;--blue-200:#b8e3ff;--blue-300:#7aceff;--blue-400:#3bb5ff;--blue-500:#0e9aff;--blue-600:#007bdf;
+  --teal-50:#f0fdfa;--teal-100:#ccfbf1;--teal-200:#99f6e4;--teal-300:#5eead4;--teal-400:#2dd4bf;--teal-500:#14b8a6;
+  --amber-50:#fffbeb;--amber-100:#fef3c7;--amber-400:#fbbf24;--amber-500:#f59e0b;
+  --emerald-400:#34d399;--emerald-500:#10b981;
+  --pink-50:#fdf2f8;--pink-400:#f472b6;--pink-500:#ec4899;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-900:#111827;
+  --bg:#faf9f6;--white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--gray-900);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(139,92,246,0.2);color:var(--purple-900)}
+.text-gradient{background:linear-gradient(135deg,#7c3aed,#0e9aff,#14b8a6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.text-gradient-warm{background:linear-gradient(135deg,#f59e0b,#f472b6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass{background:rgba(255,255,255,0.7);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.2)}
+.glass-card{background:rgba(255,255,255,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.2)}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#8b5cf6,#0e9aff);color:white;font-weight:500;border:none;border-radius:999px;padding:16px 32px;cursor:pointer;transition:all .3s;box-shadow:0 4px 14px rgba(139,92,246,0.25)}
+.btn-primary:hover{box-shadow:0 8px 25px rgba(139,92,246,0.35);transform:translateY(-1px)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{background:rgba(255,255,255,0.7);backdrop-filter:blur(12px);color:var(--gray-800);font-weight:500;border:1px solid rgba(0,0,0,0.08);border-radius:999px;padding:16px 32px;cursor:pointer;transition:all .3s}
+.btn-secondary:hover{background:rgba(255,255,255,0.9);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+/* Animations */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-50px) scale(1.1)}66%{transform:translate(-20px,20px) scale(0.9)}}
+@keyframes pulse-soft{0%,100%{opacity:.4}50%{opacity:.8}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}}
+.animate-float{animation:float 8s ease-in-out infinite}
+.animate-blob{animation:blob 8s ease-in-out infinite}
+.animate-pulse-soft{animation:pulse-soft 3s ease-in-out infinite}
+.animate-morph{animation:morph 8s ease-in-out infinite}
+.animate-spin{animation:spin 1s linear infinite}
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:all .7s ease-out}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:all .7s ease-out}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(0.9);transition:all .7s ease-out}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+/* Header */
+.header{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .5s}
+.header.scrolled{background:rgba(255,255,255,0.8);backdrop-filter:blur(24px);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+@media(min-width:640px){.header-inner{height:80px}}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-icon{width:36px;height:36px;position:relative}
+.logo-icon-inner{position:absolute;inset:0;background:linear-gradient(135deg,#7c3aed,#0e9aff,#14b8a6);border-radius:10px;transform:rotate(45deg);transition:transform .7s}
+.logo-icon:hover .logo-icon-inner{transform:rotate(135deg)}
+.logo-icon-svg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#0e9aff,#14b8a6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-desktop{display:none;align-items:center;gap:32px}
+@media(min-width:768px){.nav-desktop{display:flex}}
+.nav-link{font-size:.875rem;color:var(--gray-500);text-decoration:none;transition:color .3s;position:relative}
+.nav-link:hover{color:var(--gray-900)}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--purple-500),var(--blue-500));transition:width .3s}
+.nav-link:hover::after{width:100%}
+.mobile-menu-btn{display:block;background:none;border:none;padding:8px;cursor:pointer;z-index:51}
+@media(min-width:768px){.mobile-menu-btn{display:none}}
+.mobile-menu{display:none;background:rgba(255,255,255,0.95);backdrop-filter:blur(24px);border-top:1px solid var(--gray-100);padding:24px}
+.mobile-menu.open{display:block}
+.mobile-link{display:block;font-size:1.125rem;color:var(--gray-600);text-decoration:none;padding:12px 0;transition:color .3s}
+.mobile-link:hover{color:var(--purple-600)}
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-blob-1{position:absolute;top:25%;left:-128px;width:384px;height:384px;background:rgba(139,92,246,0.15);border-radius:50%;filter:blur(80px);animation:blob 8s ease-in-out infinite}
+.hero-blob-2{position:absolute;top:33%;right:-128px;width:384px;height:384px;background:rgba(14,154,255,0.15);border-radius:50%;filter:blur(80px);animation:blob 8s ease-in-out infinite;animation-delay:2s}
+.hero-blob-3{position:absolute;bottom:25%;left:33%;width:320px;height:320px;background:rgba(20,184,166,0.1);border-radius:50%;filter:blur(80px);animation:blob 8s ease-in-out infinite;animation-delay:4s}
+.hero-content{position:relative;z-index:10;max-width:1152px;margin:0 auto;padding:0 24px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.6);backdrop-filter:blur(12px);border-radius:999px;border:1px solid rgba(255,255,255,0.2);margin-bottom:32px;animation:fadeInUp .8s .2s both}
+.hero-badge-icon{width:16px;height:16px;color:var(--purple-500)}
+.hero-title{font-size:2.25rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:32px;animation:fadeInUp .8s .3s both}
+@media(min-width:640px){.hero-title{font-size:3rem}}
+@media(min-width:768px){.hero-title{font-size:3.75rem}}
+@media(min-width:1024px){.hero-title{font-size:4.5rem}}
+@media(min-width:1280px){.hero-title{font-size:5rem}}
+.hero-subtitle{max-width:576px;margin:0 auto 48px;font-size:1.125rem;color:var(--gray-400);line-height:1.7;animation:fadeInUp .8s .5s both}
+@media(min-width:640px){.hero-subtitle{font-size:1.25rem}}
+.hero-buttons{display:flex;flex-direction:column;align-items:center;gap:16px;animation:fadeInUp .8s .7s both}
+@media(min-width:640px){.hero-buttons{flex-direction:row;justify-content:center}}
+.hero-tags{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:96px;color:var(--gray-400);font-size:.875rem;animation:fadeIn 1s 1.2s both}
+.hero-tag{display:flex;align-items:center;gap:8px}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(90deg,var(--purple-400),var(--blue-400))}
+.scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:fadeIn 2s 1.5s both}
+.scroll-mouse{width:24px;height:40px;border-radius:12px;border:2px solid rgba(156,163,175,0.3);display:flex;justify-content:center;padding:6px}
+.scroll-dot{width:6px;height:12px;border-radius:3px;background:linear-gradient(180deg,var(--purple-400),var(--blue-400));animation:float 2s ease-in-out infinite}
+/* Sections */
+.section{padding:96px 0;position:relative}
+@media(min-width:640px){.section{padding:128px 0}}
+.section-alt{background:rgba(255,255,255,0.5)}
+.section-inner{max-width:1280px;margin:0 auto;padding:0 24px}
+.section-header{text-align:center;margin-bottom:64px}
+.section-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--purple-50);color:var(--purple-700);font-size:.875rem;font-weight:500;border-radius:999px;margin-bottom:24px}
+.section-title{font-size:1.875rem;font-weight:700;margin-bottom:16px}
+@media(min-width:640px){.section-title{font-size:2.25rem}}
+@media(min-width:768px){.section-title{font-size:3rem}}
+.section-desc{max-width:576px;margin:0 auto;color:var(--gray-400);font-size:1.125rem;line-height:1.7}
+/* Journey cards */
+.categories{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:48px}
+.cat-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);color:var(--gray-600);font-size:.875rem;font-weight:500;border-radius:999px;border:1px solid rgba(0,0,0,0.06);cursor:pointer;transition:all .3s}
+.cat-btn:hover{background:white;box-shadow:0 4px 12px rgba(0,0,0,0.06);transform:translateY(-1px)}
+.jornadas-grid{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:640px){.jornadas-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.jornadas-grid{grid-template-columns:repeat(3,1fr)}}
+.journey-card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04);cursor:pointer;transition:all .5s;text-decoration:none;display:block;position:relative}
+.journey-card:hover{box-shadow:0 10px 40px rgba(0,0,0,0.08);transform:translateY(-4px)}
+.journey-card-bg{position:absolute;inset:0;opacity:0;transition:opacity .5s;border-radius:24px}
+.journey-card:hover .journey-card-bg{opacity:1}
+.journey-card-inner{position:relative;padding:24px 32px}
+.journey-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.journey-card-icon{font-size:2.5rem}
+.journey-card-arrow{width:32px;height:32px;border-radius:50%;background:var(--purple-50);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-8px);transition:all .3s}
+.journey-card:hover .journey-card-arrow{opacity:1;transform:translateX(0)}
+.journey-card-title{font-size:1.25rem;font-weight:700;margin-bottom:8px;transition:color .3s}
+.journey-card:hover .journey-card-title{color:var(--purple-700)}
+.journey-card-desc{color:var(--gray-400);font-size:.875rem;line-height:1.6;margin-bottom:24px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.journey-card-footer{display:flex;align-items:center;justify-content:space-between}
+.journey-card-cat{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:var(--purple-50);color:var(--purple-700);font-size:.75rem;font-weight:500;border-radius:999px;transition:all .3s}
+.journey-card:hover .journey-card-cat{background:var(--purple-100)}
+.journey-card-levels{display:flex;gap:4px;font-size:.75rem;opacity:0.6;transition:opacity .3s}
+.journey-card:hover .journey-card-levels{opacity:1}
+.journey-card-bar{height:4px;background:linear-gradient(90deg,var(--purple-200),var(--blue-200),transparent);transition:all .5s}
+.journey-card:hover .journey-card-bar{background:linear-gradient(90deg,var(--purple-500),var(--blue-400),var(--teal-300))}
+/* Como funciona steps */
+.steps-container{position:relative}
+.steps-line{display:none;position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple-200),var(--blue-200),var(--teal-200));transform:translateY(-50%)}
+@media(min-width:1024px){.steps-line{display:block}}
+.steps-grid{display:grid;grid-template-columns:1fr;gap:32px}
+@media(min-width:768px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.steps-grid{grid-template-columns:repeat(5,1fr)}}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center}
+.step-icon-wrap{position:relative;margin-bottom:24px}
+.step-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.1)}
+.step-icon svg{width:28px;height:28px;color:white}
+.step-number{position:absolute;top:-8px;right:-8px;width:28px;height:28px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-size:.75rem;font-weight:700;color:var(--gray-700)}
+.step-title{font-size:1.125rem;font-weight:700;margin-bottom:8px}
+.step-desc{font-size:.875rem;color:var(--gray-400);line-height:1.6}
+/* Manifesto */
+.manifesto{position:relative;overflow:hidden}
+.manifesto-bg{position:absolute;inset:0;pointer-events:none}
+.manifesto-line-top{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--purple-200),transparent)}
+.manifesto-line-bottom{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue-200),transparent)}
+.manifesto-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(14,154,255,0.08),rgba(20,184,166,0.08));border-radius:50%;filter:blur(80px);pointer-events:none}
+.manifesto-inner{position:relative;max-width:896px;margin:0 auto;padding:0 24px;text-align:center}
+.manifesto-quote-icon{width:48px;height:48px;color:var(--purple-200);margin:0 auto 32px}
+blockquote{font-size:1.5rem;font-weight:700;line-height:1.3;margin-bottom:32px}
+@media(min-width:640px){blockquote{font-size:1.875rem}}
+@media(min-width:768px){blockquote{font-size:2.25rem}}
+@media(min-width:1024px){blockquote{font-size:3rem}}
+.manifesto-attribution{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gray-400);font-size:.875rem}
+.manifesto-line{width:32px;height:1px;background:var(--gray-300)}
+.manifesto-values{display:grid;grid-template-columns:1fr;gap:24px;margin-top:64px;text-align:left}
+@media(min-width:640px){.manifesto-values{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:768px){.manifesto-values{grid-template-columns:repeat(4,1fr)}}
+.manifesto-value{padding:24px;background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border-radius:16px;border:1px solid rgba(0,0,0,0.04);transition:all .3s}
+.manifesto-value:hover{box-shadow:0 4px 12px rgba(0,0,0,0.06);transform:translateY(-2px)}
+.manifesto-value-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.manifesto-value-icon svg{width:20px;height:20px;color:white}
+.manifesto-value-title{font-size:1.125rem;font-weight:700;margin-bottom:8px}
+.manifesto-value-desc{font-size:.875rem;color:var(--gray-400);line-height:1.6}
+/* Prompt Generator */
+.prompt-form{max-width:768px;margin:0 auto}
+.prompt-card{background:rgba(255,255,255,0.7);backdrop-filter:blur(24px);border-radius:24px;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,0.04);border:1px solid rgba(255,255,255,0.2)}
+@media(min-width:640px){.prompt-card{padding:40px}}
+.prompt-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:32px}
+@media(min-width:640px){.prompt-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.prompt-grid{grid-template-columns:repeat(3,1fr)}}
+.form-group label{display:block;font-size:.875rem;font-weight:500;color:var(--gray-600);margin-bottom:8px}
+.form-group select{width:100%;padding:12px 16px;background:white;border:1px solid var(--gray-200);border-radius:12px;color:var(--gray-600);font-size:.875rem;appearance:none;cursor:pointer;outline:none;transition:all .3s}
+.form-group select:focus{border-color:var(--purple-300);box-shadow:0 0 0 3px rgba(139,92,246,0.1)}
+/* Loading */
+.loading-container{max-width:768px;margin:48px auto 0}
+.loading-card{background:rgba(255,255,255,0.5);backdrop-filter:blur(8px);border-radius:24px;padding:40px;border:1px solid rgba(255,255,255,0.2);text-align:center}
+.loading-spinner{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--purple-200),var(--blue-200));margin:0 auto 24px;position:relative;animation:pulse-soft 2s ease-in-out infinite}
+.loading-spinner-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.loading-bars{max-width:448px;margin:0 auto 16px}
+.loading-bar{height:16px;border-radius:8px;margin-bottom:12px;background-size:200% 100%;animation:shimmer 2s ease-in-out infinite}
+.loading-text{color:var(--gray-400);font-size:.875rem}
+/* Prompt results */
+.prompts-results{max-width:1024px;margin:64px auto 0}
+.prompts-header{text-align:center;margin-bottom:40px}
+.prompts-grid{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:768px){.prompts-grid{grid-template-columns:repeat(2,1fr)}}
+.prompt-result-card{background:rgba(255,255,255,0.8);backdrop-filter:blur(12px);border-radius:16px;overflow:hidden;border:1px solid var(--gray-100);transition:all .3s}
+.prompt-result-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.prompt-result-header{display:flex;align-items:center;justify-content:space-between;padding:16px;color:white}
+.prompt-result-info{display:flex;align-items:center;gap:8px}
+.prompt-result-icon{font-size:1.25rem}
+.prompt-result-name{font-weight:700}
+.copy-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);color:white;font-size:.75rem;font-weight:500;border:none;border-radius:8px;cursor:pointer;transition:all .3s}
+.copy-btn:hover{background:rgba(255,255,255,0.3)}
+.copy-btn svg{width:14px;height:14px}
+.prompt-result-body{padding:16px;max-height:240px;overflow-y:auto}
+.prompt-result-body pre{font-size:.75rem;color:var(--gray-600);white-space:pre-wrap;font-family:'Inter',sans-serif;line-height:1.6}
+.regenerate-container{text-align:center;margin-top:40px}
+/* Evolution */
+.evolution-desktop{display:none;position:relative;margin-bottom:64px}
+@media(min-width:768px){.evolution-desktop{display:block}}
+.evolution-line{position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal-200),var(--blue-200),var(--purple-200));transform:translateY(-50%)}
+.evolution-steps{display:flex;justify-content:space-between;position:relative}
+.evolution-step{display:flex;flex-direction:column;align-items:center}
+.evolution-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.1);margin-bottom:12px;position:relative;z-index:10}
+.evolution-icon svg{width:24px;height:24px;color:white}
+.evolution-label{font-size:.875rem;font-weight:700}
+.evolution-mobile{display:flex;flex-direction:column;gap:24px}
+@media(min-width:768px){.evolution-mobile{display:none}}
+.evolution-mobile-item{padding:20px;border-radius:16px}
+.evolution-mobile-header{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.evolution-mobile-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.evolution-mobile-icon svg{width:20px;height:20px;color:white}
+.evolution-mobile-title{font-size:1.125rem;font-weight:700}
+.evolution-mobile-desc{font-size:.875rem;color:var(--gray-400)}
+.evolution-bar{width:100%;height:8px;background:white;border-radius:4px;overflow:hidden;margin-top:12px}
+.evolution-bar-fill{height:100%;border-radius:4px;width:0;transition:width 1.5s ease-out}
+.evolution-bar-fill.visible{width:var(--progress)}
+.evolution-cards{display:none;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+@media(min-width:768px){.evolution-cards{display:grid}}
+.evolution-card{padding:20px;border-radius:16px;text-align:center}
+.evolution-card-desc{font-size:.875rem;color:var(--gray-500);margin-bottom:12px;line-height:1.5}
+.evolution-card-bar{width:100%;height:6px;background:white;border-radius:4px;overflow:hidden}
+.evolution-card-fill{height:100%;border-radius:4px;width:0;transition:width 1.5s ease-out}
+.evolution-card-fill.visible{width:var(--progress)}
+/* Mural */
+.mural-grid{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:640px){.mural-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.mural-grid{grid-template-columns:repeat(3,1fr)}}
+.mural-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04);transition:all .5s}
+.mural-card:hover{box-shadow:0 10px 40px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.mural-card-bg{height:8px}
+.mural-card-body{padding:24px}
+.mural-card-author{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.mural-avatar{font-size:1.75rem}
+.mural-author-name{font-weight:700}
+.mural-author-level{font-size:.75rem;color:var(--gray-400)}
+.mural-text{color:var(--gray-500);font-size:.875rem;line-height:1.6;margin-bottom:24px}
+.mural-actions{display:flex;align-items:center;justify-content:space-between;color:var(--gray-400);font-size:.875rem}
+.mural-actions-left{display:flex;align-items:center;gap:16px}
+.mural-action-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:inherit;cursor:pointer;transition:color .3s;padding:4px;font-size:.875rem}
+.mural-action-btn:hover{color:var(--pink-500)}
+.mural-share{background:none;border:none;color:inherit;cursor:pointer;transition:color .3s;display:flex;align-items:center}
+.mural-share:hover{color:var(--purple-500)}
+.mural-card.wide{grid-column:span 2}
+@media(max-width:639px){.mural-card.wide{grid-column:span 1}}
+/* Footer */
+.footer{position:relative;background:var(--gray-900);color:var(--gray-400);overflow:hidden}
+.footer-glow-1{position:absolute;top:-160px;right:-160px;width:320px;height:320px;background:rgba(139,92,246,0.05);border-radius:50%;filter:blur(80px);pointer-events:none}
+.footer-glow-2{position:absolute;bottom:-160px;left:-160px;width:320px;height:320px;background:rgba(14,154,255,0.05);border-radius:50%;filter:blur(80px);pointer-events:none}
+.footer-inner{position:relative;max-width:1280px;margin:0 auto;padding:80px 24px 40px}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:40px;margin-bottom:64px}
+@media(min-width:768px){.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.footer-brand{max-width:384px}
+.footer-logo{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.footer-logo-icon{width:36px;height:36px;position:relative}
+.footer-logo-icon-inner{position:absolute;inset:0;background:linear-gradient(135deg,#7c3aed,#0e9aff,#14b8a6);border-radius:10px;transform:rotate(45deg)}
+.footer-logo-svg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.footer-logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#60a5fa,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-text{font-size:.875rem;line-height:1.6;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.footer-social-btn{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--gray-400);text-decoration:none;transition:all .3s}
+.footer-social-btn:hover{background:linear-gradient(135deg,var(--purple-600),var(--blue-500));color:white;transform:scale(1.05)}
+.footer-col-title{color:white;font-weight:700;margin-bottom:16px;font-size:.75rem;text-transform:uppercase;letter-spacing:0.05em}
+.footer-links{list-style:none}
+.footer-link{margin-bottom:12px}
+.footer-link a{color:var(--gray-400);font-size:.875rem;text-decoration:none;transition:color .3s}
+.footer-link a:hover{color:white}
+.footer-bottom{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);font-size:.875rem}
+@media(min-width:640px){.footer-bottom{flex-direction:row}}
+.footer-bottom-links{display:flex;align-items:center;gap:16px}
+.footer-bottom-links a{color:var(--gray-500);text-decoration:none;transition:color .3s}
+.footer-bottom-links a:hover{color:var(--gray-300)}
+.footer-heart{color:var(--pink-400)}
+/* Utility */
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- Particles Canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <div class="logo-icon-inner"></div>
+        <div class="logo-icon-svg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </div>
+      </div>
+      <span class="logo-text">AMORA</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#jornadas" class="nav-link">Jornadas</a>
+      <a href="#como-funciona" class="nav-link">Como Funciona</a>
+      <a href="#gerador-ia" class="nav-link">Gerador IA</a>
+      <a href="#comunidade" class="nav-link">Comunidade</a>
+      <a href="#manifesto" class="nav-link">Manifesto</a>
+      <button class="btn-primary" style="padding:10px 20px;font-size:.875rem" onclick="document.getElementById('gerador-ia').scrollIntoView({behavior:'smooth'})">
+        <svg style="display:inline;width:16px;height:16px;margin-right:6px;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Começar Jornada
+      </button>
+    </nav>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+      <svg id="menu-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="menu-icon-close" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#jornadas" class="mobile-link" onclick="toggleMobileMenu()">Jornadas</a>
+    <a href="#como-funciona" class="mobile-link" onclick="toggleMobileMenu()">Como Funciona</a>
+    <a href="#gerador-ia" class="mobile-link" onclick="toggleMobileMenu()">Gerador IA</a>
+    <a href="#comunidade" class="mobile-link" onclick="toggleMobileMenu()">Comunidade</a>
+    <a href="#manifesto" class="mobile-link" onclick="toggleMobileMenu()">Manifesto</a>
+    <button class="btn-primary" style="width:100%;margin-top:16px" onclick="document.getElementById('gerador-ia').scrollIntoView({behavior:'smooth'});toggleMobileMenu()">
+      <svg style="display:inline;width:16px;height:16px;margin-right:6px;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Começar Jornada
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+    <div class="hero-blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg class="hero-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      Onde criatividade e inteligência se encontram
+    </div>
+    <h1 class="hero-title">
+      <span style="display:block">Descubra habilidades.</span>
+      <span style="display:block;margin-top:8px"><span class="text-gradient">Crie objetivos.</span></span>
+      <span style="display:block;margin-top:8px">Evolua com <span class="text-gradient-warm">inteligência artificial.</span></span>
+    </h1>
+    <p class="hero-subtitle">A AMORA conecta criatividade, aprendizado e IA para ajudar pessoas a desenvolverem novas habilidades no seu próprio ritmo.</p>
+    <div class="hero-buttons">
+      <a href="#jornadas" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        Explorar Jornadas
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <button class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px" onclick="document.getElementById('gerador-ia').scrollIntoView({behavior:'smooth'})">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Criar Minha Jornada
+      </button>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag"><span class="hero-tag-dot"></span>Inspiração</span>
+      <span class="hero-tag"><span class="hero-tag-dot"></span>Criatividade</span>
+      <span class="hero-tag"><span class="hero-tag-dot"></span>Evolução</span>
+      <span class="hero-tag"><span class="hero-tag-dot"></span>IA Humana</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+  </div>
+</section>
+
+<!-- Jornadas -->
+<section class="section" id="jornadas">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Explore possibilidades
+      </div>
+      <h2 class="section-title">Escolha sua <span class="text-gradient">jornada</span></h2>
+      <p class="section-desc">Cada jornada é um universo de descobertas. Escolha o que desperta sua curiosidade e comece a explorar.</p>
+    </div>
+    <div class="categories reveal">
+      <button class="cat-btn" onclick="filterCategory('all',this)"><span>🎭</span> Todas</button>
+      <button class="cat-btn" onclick="filterCategory('Arte',this)"><span>🎭</span> Arte</button>
+      <button class="cat-btn" onclick="filterCategory('Música',this)"><span>🎵</span> Música</button>
+      <button class="cat-btn" onclick="filterCategory('Movimento',this)"><span>🏃</span> Movimento</button>
+      <button class="cat-btn" onclick="filterCategory('Criação Manual',this)"><span>🖐️</span> Criação Manual</button>
+      <button class="cat-btn" onclick="filterCategory('Tecnologia Criativa',this)"><span>💡</span> Tecnologia Criativa</button>
+    </div>
+    <div class="jornadas-grid" id="jornadas-grid"></div>
+  </div>
+</section>
+
+<!-- Como Funciona -->
+<section class="section section-alt" id="como-funciona">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-badge" style="background:var(--blue-50);color:var(--blue-700)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Como funciona
+      </div>
+      <h2 class="section-title">Sua jornada em <span class="text-gradient-warm">5 passos</span></h2>
+      <p class="section-desc">Um processo simples e orgânico para transformar curiosidade em habilidade real.</p>
+    </div>
+    <div class="steps-container">
+      <div class="steps-line"></div>
+      <div class="steps-grid" id="steps-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Gerador de Prompts IA -->
+<section class="section" id="gerador-ia" style="background:rgba(255,255,255,0.3)">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-badge" style="background:var(--purple-50);color:var(--purple-700)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Gerador de Prompts IA
+      </div>
+      <h2 class="section-title">Seu mentor <span class="text-gradient">inteligente</span></h2>
+      <p class="section-desc">Responda algumas perguntas e receba prompts personalizados para ChatGPT, Gemini, Claude e Midjourney.</p>
+    </div>
+    <div class="prompt-form reveal">
+      <div class="prompt-card">
+        <div class="prompt-grid">
+          <div class="form-group">
+            <label>Nível</label>
+            <select id="p-nivel">
+              <option value="iniciante">🌱 Descobrindo</option>
+              <option value="intermediario">🌿 Praticando</option>
+              <option value="avancado">🌳 Criando</option>
+              <option value="expert">✨ Inspirando</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Objetivo</label>
+            <select id="p-objetivo">
+              <option value="hobby">Hobby e diversão</option>
+              <option value="relaxamento">Relaxamento</option>
+              <option value="profissional">Desenvolvimento profissional</option>
+              <option value="criatividade">Expressão criativa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tempo disponível</label>
+            <select id="p-tempo">
+              <option value="15min">⏱️ 15 minutos/dia</option>
+              <option value="30min" selected>⏱️ 30 minutos/dia</option>
+              <option value="1h">⏱️ 1 hora/dia</option>
+              <option value="2h">⏱️ 2+ horas/dia</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Faixa etária</label>
+            <select id="p-faixa">
+              <option value="crianca">🧒 Crianças (7-12)</option>
+              <option value="adolescente">🧑 Adolescentes (13-17)</option>
+              <option value="adulto" selected>👩 Adultos (18-40)</option>
+              <option value="adulto+">👴 Adultos 40+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estilo</label>
+            <select id="p-estilo">
+              <option value="pratico">🎯 Prático e direto</option>
+              <option value="criativo">🎨 Criativo e aberto</option>
+              <option value="didatico">📚 Estruturado e didático</option>
+              <option value="reflexivo">🧘 Reflexivo e filosófico</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary" style="width:100%;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px" onclick="generatePrompts()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          Gerar Prompts Personalizados
+        </button>
+      </div>
+    </div>
+    <div id="loading-container" class="loading-container hidden">
+      <div class="loading-card">
+        <div class="loading-spinner">
+          <svg class="loading-spinner-icon animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple-500)" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        </div>
+        <div class="loading-bars">
+          <div class="loading-bar" style="width:80%;background:linear-gradient(90deg,var(--purple-100),var(--blue-100),var(--teal-100))"></div>
+          <div class="loading-bar" style="width:65%;background:linear-gradient(90deg,var(--purple-100),var(--blue-100),var(--teal-100));margin-left:24px"></div>
+          <div class="loading-bar" style="width:70%;background:linear-gradient(90deg,var(--purple-100),var(--blue-100),var(--teal-100));margin-left:12px"></div>
+        </div>
+        <p class="loading-text">Criando seus prompts personalizados...</p>
+      </div>
+    </div>
+    <div id="prompts-results" class="prompts-results hidden"></div>
+  </div>
+</section>
+
+<!-- Evolução -->
+<section class="section section-alt" id="evolucao">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-badge" style="background:var(--teal-50);color:var(--teal-700)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Sua evolução
+      </div>
+      <h2 class="section-title">Cresça no seu <span class="text-gradient">próprio ritmo</span></h2>
+      <p class="section-desc">Cada fase é uma conquista. Celebre seu progresso e inspire outros com sua jornada.</p>
+    </div>
+    <div class="evolution-desktop reveal">
+      <div class="evolution-line"></div>
+      <div class="evolution-steps" id="evolution-steps"></div>
+    </div>
+    <div class="evolution-mobile reveal" id="evolution-mobile"></div>
+    <div class="evolution-cards reveal" id="evolution-cards"></div>
+  </div>
+</section>
+
+<!-- Mural da Comunidade -->
+<section class="section" id="comunidade">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-badge" style="background:var(--pink-50);color:var(--pink-700)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        Mural da Comunidade
+      </div>
+      <h2 class="section-title">Evoluções que <span class="text-gradient-warm">inspiram</span></h2>
+      <p class="section-desc">Veja o que outras pessoas estão criando e compartilhe sua própria evolução.</p>
+    </div>
+    <div class="mural-grid" id="mural-grid"></div>
+  </div>
+</section>
+
+<!-- Manifesto -->
+<section class="section manifesto" id="manifesto">
+  <div class="manifesto-bg">
+    <div class="manifesto-line-top"></div>
+    <div class="manifesto-line-bottom"></div>
+    <div class="manifesto-glow"></div>
+  </div>
+  <div class="manifesto-inner">
+    <div class="reveal" style="margin-bottom:32px">
+      <div class="section-badge" style="background:var(--amber-50);color:var(--amber-600);display:inline-flex">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+        Nosso manifesto
+      </div>
+    </div>
+    <div class="reveal">
+      <svg class="manifesto-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zM15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+      <blockquote>
+        &ldquo;Acreditamos que toda pessoa pode<br>
+        <span class="text-gradient">desenvolver novas habilidades</span><br>
+        quando recebe <span class="text-gradient-warm">inspiração</span>, <span class="text-gradient-warm">direção</span><br>
+        e <span class="text-gradient">liberdade</span> para explorar<br>
+        seu próprio caminho.&rdquo;
+      </blockquote>
+      <div class="manifesto-attribution">
+        <span class="manifesto-line"></span>
+        <span style="font-size:.875rem;font-weight:500">AMORA — Filosofia</span>
+        <span class="manifesto-line"></span>
+      </div>
+    </div>
+    <div class="manifesto-values reveal" id="manifesto-values"></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-glow-1"></div>
+  <div class="footer-glow-2"></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand reveal">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">
+            <div class="footer-logo-icon-inner"></div>
+            <div class="footer-logo-svg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </div>
+          </div>
+          <span class="footer-logo-text">AMORA</span>
+        </div>
+        <p class="footer-text">A AMORA conecta criatividade, aprendizado e IA para ajudar pessoas a desenvolverem novas habilidades no seu próprio ritmo.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+          <a href="#" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="footer-social-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+        </div>
+      </div>
+      <div class="reveal">
+        <h3 class="footer-col-title">Explorar</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#jornadas">Jornadas</a></li>
+          <li class="footer-link"><a href="#como-funciona">Como Funciona</a></li>
+          <li class="footer-link"><a href="#gerador-ia">Gerador IA</a></li>
+          <li class="footer-link"><a href="#comunidade">Comunidade</a></li>
+          <li class="footer-link"><a href="#manifesto">Manifesto</a></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="footer-col-title">Jornadas</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#jornadas">Arte</a></li>
+          <li class="footer-link"><a href="#jornadas">Música</a></li>
+          <li class="footer-link"><a href="#jornadas">Movimento</a></li>
+          <li class="footer-link"><a href="#jornadas">Criação Manual</a></li>
+          <li class="footer-link"><a href="#jornadas">Tecnologia Criativa</a></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="footer-col-title">AMORA</h3>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="#">Sobre</a></li>
+          <li class="footer-link"><a href="#manifesto">Filosofia</a></li>
+          <li class="footer-link"><a href="#">Contato</a></li>
+          <li class="footer-link"><a href="#">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 AMORA. Todos os direitos reservados.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacidade</a>
+        <a href="#">Termos</a>
+        <span>Feito com <span class="footer-heart">&#10084;</span> e IA</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DATA =====
+const jornadasData = [
+  {id:'pintura-criativa',title:'Pintura Criativa',cat:'Arte',desc:'Explore cores, texturas e formas para expressar seu mundo interior.',icon:'🎨',gradient:'from-violet-500/20 via-fuchsia-500/10 to-pink-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'desenho-artistico',title:'Desenho Artístico',cat:'Arte',desc:'Do traço livre à ilustração profissional. Descubra o poder do desenho.',icon:'✏️',gradient:'from-amber-500/20 via-orange-500/10 to-yellow-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'fotografia-expressiva',title:'Fotografia Expressiva',cat:'Arte',desc:'Capture momentos, emoções e histórias através das lentes.',icon:'📷',gradient:'from-sky-500/20 via-blue-500/10 to-indigo-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'piano-expressivo',title:'Piano Expressivo',cat:'Música',desc:'Descubra a magia de criar música com suas próprias mãos.',icon:'🎹',gradient:'from-indigo-500/20 via-purple-500/10 to-pink-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'composicao-musical',title:'Composição Musical',cat:'Música',desc:'Crie melodias que tocam a alma e contam histórias sonoras.',icon:'🎼',gradient:'from-rose-500/20 via-pink-500/10 to-fuchsia-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'violao-criativo',title:'Violão Criativo',cat:'Música',desc:'Do primeiro acorde à canção completa. Descubra o violão.',icon:'🎸',gradient:'from-amber-500/20 via-yellow-500/10 to-orange-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'volei-ativo',title:'Vôlei Ativo',cat:'Movimento',desc:'Movimento, equipe e estratégia. Descubra o vôlei como prática.',icon:'🏐',gradient:'from-blue-500/20 via-cyan-500/10 to-teal-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'bicicleta-exploradora',title:'Bicicleta Exploradora',cat:'Movimento',desc:'Pedale rumo a novas descobertas. Liberdade sobre duas rodas.',icon:'🚴',gradient:'from-emerald-500/20 via-green-500/10 to-teal-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'alongamento-consciente',title:'Alongamento Consciente',cat:'Movimento',desc:'Conecte corpo e mente através do movimento consciente.',icon:'🧘',gradient:'from-green-500/20 via-emerald-500/10 to-teal-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'croche-criativo',title:'Crochê Criativo',cat:'Criação Manual',desc:'Transforme fios em arte. Cada ponto é uma criação única.',icon:'🧶',gradient:'from-pink-500/20 via-rose-500/10 to-fuchsia-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'culinaria-criativa',title:'Culinária Criativa',cat:'Criação Manual',desc:'Descubra o chef que existe em você. Cozinhar é criar.',icon:'🍳',gradient:'from-orange-500/20 via-amber-500/10 to-yellow-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'jardinagem-consciente',title:'Jardinagem Consciente',cat:'Criação Manual',desc:'Cultive vida, paciência e conexão com a natureza.',icon:'🌱',gradient:'from-green-500/20 via-emerald-500/10 to-lime-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'ia-criativa',title:'IA Criativa',cat:'Tecnologia Criativa',desc:'Use IA como ferramenta de expressão e criação.',icon:'🤖',gradient:'from-purple-500/20 via-violet-500/10 to-indigo-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'audiovisual-criativo',title:'Audiovisual Criativo',cat:'Tecnologia Criativa',desc:'Conte histórias que emocionam através do som e da imagem.',icon:'🎬',gradient:'from-red-500/20 via-rose-500/10 to-pink-500/20',levels:['🌱','🌿','🌳','✨']},
+  {id:'design-criativo',title:'Design Criativo',cat:'Tecnologia Criativa',desc:'Transforme ideias em visuais que comunicam e inspiram.',icon:'✒️',gradient:'from-cyan-500/20 via-blue-500/10 to-indigo-500/20',levels:['🌱','🌿','🌳','✨']}
+];
+
+const stepsData = [
+  {num:'01',icon:'compass',title:'Escolha uma jornada',desc:'Explore diferentes áreas e encontre o que desperta sua curiosidade.',color:'from-purple-500 to-blue-500'},
+  {num:'02',icon:'target',title:'Defina seus objetivos',desc:'Estabeleça metas pessoais que fazem sentido para sua história.',color:'from-blue-500 to-teal-400'},
+  {num:'03',icon:'brain',title:'Receba orientação IA',desc:'Prompts inteligentes criados sob medida para sua jornada única.',color:'from-teal-400 to-emerald-400'},
+  {num:'04',icon:'heart',title:'Pratique no mundo real',desc:'Aplique o que aprendeu em projetos e experiências reais.',color:'from-amber-400 to-orange-400'},
+  {num:'05',icon:'share',title:'Compartilhe evolução',desc:'Inspire outros compartilhando sua jornada e descobertas.',color:'from-pink-400 to-rose-400'}
+];
+
+const evolutionData = [
+  {name:'Descobrindo',emoji:'🌱',icon:'leaf',desc:'Primeiros passos, curiosidade e experimentação.',color:'from-green-400 to-emerald-500',bg:'bg-green-50',progress:25},
+  {name:'Praticando',emoji:'🌿',icon:'tree',desc:'Consistência, técnicas e desenvolvimento.',color:'from-teal-400 to-cyan-500',bg:'bg-teal-50',progress:50},
+  {name:'Criando',emoji:'🌳',icon:'flower',desc:'Autonomia, estilo próprio e projetos autorais.',color:'from-blue-400 to-indigo-500',bg:'bg-blue-50',progress:75},
+  {name:'Inspirando',emoji:'✨',icon:'star',desc:'Mentoria, compartilhamento e legado.',color:'from-purple-400 to-pink-500',bg:'bg-purple-50',progress:100}
+];
+
+const muralData = [
+  {id:1,autor:'Ana Clara',avatar:'🎨',texto:'Completei meu primeiro quadro a óleo! A jornada de pintura me ajudou a encontrar uma nova forma de expressão.',cor:'from-violet-500 to-fuchsia-500',reacoes:24,comentarios:8,nivel:'🌳 Criando'},
+  {id:2,autor:'Lucas Mendes',avatar:'🎹',texto:'Consegui tocar minha primeira música completa no piano. Cada dia de prática valeu a pena!',cor:'from-blue-500 to-indigo-500',reacoes:31,comentarios:12,nivel:'🌿 Praticando'},
+  {id:3,autor:'Carla Souza',avatar:'📷',texto:'Meu ensaio fotográfico sobre luz natural ficou lindo! Obrigada AMORA pelas dicas.',cor:'from-amber-500 to-orange-500',reacoes:18,comentarios:5,nivel:'✨ Inspirando'},
+  {id:4,autor:'Rafael Oliveira',avatar:'🧶',texto:'Nunca imaginei que conseguiria fazer um cachecol inteiro de crochê. Estou tão orgulhosa!',cor:'from-pink-500 to-rose-500',reacoes:15,comentarios:6,nivel:'🌱 Descobrindo'},
+  {id:5,autor:'Juliana Costa',avatar:'🤖',texto:'Usei IA para criar uma série de ilustrações para meu livro infantil. Tecnologia e criatividade se encontrando!',cor:'from-purple-500 to-pink-500',reacoes:42,comentarios:15,nivel:'🌳 Criando'},
+  {id:6,autor:'Pedro Santos',avatar:'🏐',texto:'Meu time ganhou o campeonato amador! A jornada de vôlei me ensinou muito sobre trabalho em equipe.',cor:'from-cyan-500 to-blue-500',reacoes:27,comentarios:9,nivel:'🌿 Praticando'},
+  {id:7,autor:'Marina Lima',avatar:'🍳',texto:'Fiz meu primeiro jantar completo para a família! Cada receita foi uma descoberta.',cor:'from-red-500 to-rose-500',reacoes:33,comentarios:11,nivel:'🌱 Descobrindo'},
+  {id:8,autor:'Thiago Alves',avatar:'✏️',texto:'Meu retrato realista em carvão ficou melhor do que eu esperava. A prática realmente faz a diferença!',cor:'from-gray-500 to-slate-500',reacoes:21,comentarios:7,nivel:'🌳 Criando'},
+  {id:9,autor:'Larissa Franco',avatar:'🧘',texto:'30 dias de alongamento diário transformaram minha postura e minha relação com meu corpo.',cor:'from-emerald-500 to-teal-500',reacoes:39,comentarios:14,nivel:'✨ Inspirando'}
+];
+
+const manifestoValues = [
+  {title:'Inspiração',desc:'Despertar a curiosidade que existe em cada pessoa.',color:'from-purple-500 to-blue-500'},
+  {title:'Criatividade',desc:'Valorizar o processo criativo como ferramenta de descoberta.',color:'from-blue-500 to-teal-400'},
+  {title:'Evolução',desc:'Celebrar cada passo, não apenas o destino final.',color:'from-teal-400 to-emerald-400'},
+  {title:'Humanidade',desc:'Colocar a tecnologia a serviço do potencial humano.',color:'from-amber-400 to-orange-400'}
+];
+
+// ===== SVG ICONS =====
+function getIcon(name){
+  const icons={
+    compass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+    target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+    brain:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M12 4a4 4 0 0 1 3.5 2.14 4.5 4.5 0 0 1 2.5 8.36V18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-3.5A4.5 4.5 0 0 1 8.5 6.14 4 4 0 0 1 12 4z"/><path d="M12 4v16"/></svg>',
+    heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
+    share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>',
+    leaf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>',
+    tree:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 22v-7"/><path d="M7 15c-1.5 0-2.5-.5-3.5-1.5a4.5 4.5 0 0 1 1-7.5 6 6 0 0 1 11-3A5.5 5.5 0 0 1 17 15H7z"/></svg>',
+    flower:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>',
+    star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    sparkles:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>'
+  };
+  return icons[name]||'';
+}
+
+// ===== PARTICLES =====
+(function initParticles(){
+  const canvas=document.getElementById('particles-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let particles=[];
+  const colors=['139,92,246','59,181,255','45,212,191','251,146,60','244,114,182'];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+  function createParticles(){
+    particles=[];
+    const count=Math.min(Math.floor(window.innerWidth*0.05),60);
+    for(let i=0;i<count;i++)particles.push({
+      x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+      size:Math.random()*3+1,speedX:(Math.random()-0.5)*0.3,speedY:(Math.random()-0.5)*0.3,
+      opacity:Math.random()*0.4+0.1,color:colors[Math.floor(Math.random()*colors.length)]
+    });
+  }
+  function connect(){
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<150){ctx.beginPath();ctx.strokeStyle=`rgba(139,92,246,${0.06*(1-d/150)})`;ctx.lineWidth=0.5;ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke()}
+      }
+    }
+  }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x+=p.speedX;p.y+=p.speedY;
+      if(p.x>canvas.width)p.x=0;if(p.x<0)p.x=canvas.width;
+      if(p.y>canvas.height)p.y=0;if(p.y<0)p.y=canvas.height;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.color},${p.opacity})`;ctx.fill();
+    });
+    connect();requestAnimationFrame(animate);
+  }
+  resize();createParticles();animate();
+  window.addEventListener('resize',()=>{resize();createParticles()});
+})();
+
+// ===== HEADER =====
+window.addEventListener('scroll',()=>{
+  const h=document.getElementById('header');
+  h&&h.classList.toggle('scrolled',window.scrollY>50);
+});
+
+function toggleMobileMenu(){
+  const menu=document.getElementById('mobile-menu');
+  const open=document.getElementById('menu-icon-open');
+  const close=document.getElementById('menu-icon-close');
+  menu.classList.toggle('open');
+  open.classList.toggle('hidden');
+  close.classList.toggle('hidden');
+}
+
+// ===== SCROLL REVEAL =====
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}});
+},{threshold:0.1});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>observer.observe(el));
+  renderJornadas();
+  renderSteps();
+  renderEvolution();
+  renderMural();
+  renderManifestoValues();
+  observeBars();
+});
+
+// ===== JORNADAS =====
+function renderJornadas(filter='all'){
+  const grid=document.getElementById('jornadas-grid');
+  const items=filter==='all'?jornadasData:jornadasData.filter(j=>j.cat===filter);
+  grid.innerHTML=items.map((j,i)=>`
+    <a class="journey-card" style="animation:fadeInUp .5s ${i*0.08}s both" href="#">
+      <div class="journey-card-bg" style="background:linear-gradient(135deg,${j.gradient})"></div>
+      <div class="journey-card-inner">
+        <div class="journey-card-header">
+          <div class="journey-card-icon">${j.icon}</div>
+          <div class="journey-card-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple-600)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+        <h3 class="journey-card-title">${j.title}</h3>
+        <p class="journey-card-desc">${j.desc}</p>
+        <div class="journey-card-footer">
+          <span class="journey-card-cat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>${j.cat}</span>
+          <div class="journey-card-levels">${j.levels.join('')}</div>
+        </div>
+      </div>
+      <div class="journey-card-bar"></div>
+    </a>
+  `).join('');
+}
+
+let currentFilter='all';
+function filterCategory(cat,btn){
+  currentFilter=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.style.background=b===btn?'var(--purple-100)':'rgba(255,255,255,0.7)');
+  renderJornadas(cat);
+}
+
+// ===== STEPS =====
+function renderSteps(){
+  const grid=document.getElementById('steps-grid');
+  grid.innerHTML=stepsData.map((s,i)=>`
+    <div class="step reveal" style="transition-delay:${i*0.1}s">
+      <div class="step-icon-wrap">
+        <div class="step-icon" style="background:linear-gradient(135deg,${s.color})">${getIcon(s.icon)}</div>
+        <div class="step-number">${s.num}</div>
+      </div>
+      <h3 class="step-title">${s.title}</h3>
+      <p class="step-desc">${s.desc}</p>
+    </div>
+  `).join('');
+  document.querySelectorAll('#steps-grid .reveal').forEach(el=>observer.observe(el));
+}
+
+// ===== EVOLUTION =====
+function renderEvolution(){
+  // Desktop steps
+  const stepsEl=document.getElementById('evolution-steps');
+  stepsEl.innerHTML=evolutionData.map((e,i)=>`
+    <div class="evolution-step reveal" style="transition-delay:${i*0.15}s">
+      <div class="evolution-icon" style="background:linear-gradient(135deg,${e.color})">${getIcon(e.icon)}</div>
+      <span class="evolution-label">${e.emoji} ${e.name}</span>
+    </div>
+  `).join('');
+
+  // Mobile
+  const mobEl=document.getElementById('evolution-mobile');
+  mobEl.innerHTML=evolutionData.map((e,i)=>`
+    <div class="evolution-mobile-item reveal" style="background:${['var(--teal-50)','var(--blue-50)','var(--purple-50)','var(--pink-50)'][i]};transition-delay:${i*0.1}s">
+      <div class="evolution-mobile-header">
+        <div class="evolution-mobile-icon" style="background:linear-gradient(135deg,${e.color})">${getIcon(e.icon)}</div>
+        <div><div class="evolution-mobile-title">${e.emoji} ${e.name}</div><div class="evolution-mobile-desc">${e.desc}</div></div>
+      </div>
+      <div class="evolution-bar"><div class="evolution-bar-fill" style="background:linear-gradient(135deg,${e.color})" data-progress="${e.progress}"></div></div>
+    </div>
+  `).join('');
+
+  // Cards
+  const cardsEl=document.getElementById('evolution-cards');
+  cardsEl.innerHTML=evolutionData.map((e,i)=>`
+    <div class="evolution-card reveal" style="background:${['var(--teal-50)','var(--blue-50)','var(--purple-50)','var(--pink-50)'][i]};transition-delay:${i*0.1}s">
+      <p class="evolution-card-desc">${e.desc}</p>
+      <div class="evolution-card-bar"><div class="evolution-card-fill" style="background:linear-gradient(135deg,${e.color})" data-progress="${e.progress}"></div></div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('#evolution-steps .reveal,#evolution-mobile .reveal,#evolution-cards .reveal').forEach(el=>observer.observe(el));
+}
+
+function observeBars(){
+  const barObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.style.setProperty('--progress',entry.target.dataset.progress+'%');entry.target.classList.add('visible');barObserver.unobserve(entry.target)}
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('.evolution-bar-fill,.evolution-card-fill').forEach(el=>barObserver.observe(el));
+}
+
+// ===== MURAL =====
+function renderMural(){
+  const grid=document.getElementById('mural-grid');
+  grid.innerHTML=muralData.map((m,i)=>`
+    <div class="mural-card${i===0?' wide':''} reveal" style="transition-delay:${i*0.05}s">
+      <div class="mural-card-bg" style="background:linear-gradient(135deg,${m.cor})"></div>
+      <div class="mural-card-body">
+        <div class="mural-card-author">
+          <div class="mural-avatar">${m.avatar}</div>
+          <div><div class="mural-author-name">${m.autor}</div><div class="mural-author-level">${m.nivel}</div></div>
+        </div>
+        <p class="mural-text">${m.texto}</p>
+        <div class="mural-actions">
+          <div class="mural-actions-left">
+            <button class="mural-action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>${m.reacoes}</span></button>
+            <button class="mural-action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>${m.comentarios}</span></button>
+          </div>
+          <button class="mural-share"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#mural-grid .reveal').forEach(el=>observer.observe(el));
+}
+
+// ===== MANIFESTO VALUES =====
+function renderManifestoValues(){
+  const el=document.getElementById('manifesto-values');
+  el.innerHTML=manifestoValues.map((v,i)=>`
+    <div class="manifesto-value reveal" style="transition-delay:${i*0.1}s">
+      <div class="manifesto-value-icon" style="background:linear-gradient(135deg,${v.color})">${getIcon('sparkles')}</div>
+      <h3 class="manifesto-value-title">${v.title}</h3>
+      <p class="manifesto-value-desc">${v.desc}</p>
+    </div>
+  `).join('');
+  document.querySelectorAll('#manifesto-values .reveal').forEach(el=>observer.observe(el));
+}
+
+// ===== PROMPT GENERATOR =====
+function generatePrompts(){
+  const nivel=document.getElementById('p-nivel').value;
+  const objetivo=document.getElementById('p-objetivo').value;
+  const tempo=document.getElementById('p-tempo').value;
+  const faixa=document.getElementById('p-faixa').value;
+  const estilo=document.getElementById('p-estilo').value;
+
+  const loading=document.getElementById('loading-container');
+  const results=document.getElementById('prompts-results');
+  loading.classList.remove('hidden');
+  results.classList.add('hidden');
+
+  const labels={iniciante:'🌱 Descobrindo',intermediario:'🌿 Praticando',avancado:'🌳 Criando',expert:'✨ Inspirando'};
+  const objLabels={hobby:'Hobby e diversão',relaxamento:'Relaxamento',profissional:'Desenvolvimento profissional',criatividade:'Expressão criativa'};
+  const tempoLabels={'15min':'⏱️ 15 minutos/dia','30min':'⏱️ 30 minutos/dia','1h':'⏱️ 1 hora/dia','2h':'⏱️ 2+ horas/dia'};
+  const faixaLabels={crianca:'🧒 Crianças (7-12)',adolescente:'🧑 Adolescentes (13-17)',adulto:'👩 Adultos (18-40)','adulto+':'👴 Adultos 40+'};
+
+  setTimeout(()=>{
+    const prompts=[
+      {tool:'ChatGPT',icon:'💬',color:'from-green-400 to-emerald-500',text:`Você é um mentor criativo especializado em desenvolvimento pessoal e aprendizado de habilidades.
+
+Meu nível atual é: ${labels[nivel] || nivel}
+Meu objetivo é: ${objLabels[objetivo] || objetivo}
+Tenho disponível: ${tempoLabels[tempo] || tempo}
+Minha faixa etária: ${faixaLabels[faixa] || faixa}
+Prefiro um estilo: ${estilo}
+
+Crie um plano de aprendizado personalizado para mim que inclua:
+
+1. Missão da Semana: Um desafio prático e inspirador para começar
+2. Roteiro Diário: Passos simples para cada dia, respeitando meu tempo disponível
+3. Exercício Criativo: Uma atividade que estimule minha expressão pessoal
+4. Pergunta Reflexiva: Algo para me fazer pensar sobre minha relação com esta habilidade
+5. Recurso Recomendado: Um livro, vídeo, podcast ou ferramenta que possa me inspirar
+
+Seja humano, motivador e prático. Use linguagem acolhedora e inspiradora.`},
+      {tool:'Gemini',icon:'🌟',color:'from-blue-400 to-indigo-500',text:`Atue como um guia de aprendizagem criativa e personalizada.
+
+Perfil do aprendiz:
+- Nível: ${labels[nivel] || nivel}
+- Objetivo: ${objLabels[objetivo] || objetivo}
+- Tempo disponível: ${tempoLabels[tempo] || tempo}
+- Faixa etária: ${faixaLabels[faixa] || faixa}
+- Estilo preferido: ${estilo}
+
+Com base neste perfil, gere:
+
+📌 Um projeto prático semanal que a pessoa possa realizar com os recursos que tem em casa
+📌 3 micro-desafios diários (cada um cabendo no tempo disponível)
+📌 Uma curadoria de inspiração: 3 referências artísticas, técnicas ou filosóficas
+📌 Um exercício de criatividade para conectar esta habilidade com outras áreas da vida
+📌 Uma mensagem motivacional personalizada para começar hoje`},
+      {tool:'Claude',icon:'🤖',color:'from-amber-400 to-orange-500',text:`You are a warm, insightful creative mentor helping someone discover and develop a new skill.
+
+Learner Profile:
+- Level: ${labels[nivel] || nivel}
+- Goal: ${objLabels[objetivo] || objetivo}
+- Available time: ${tempoLabels[tempo] || tempo}
+- Age group: ${faixaLabels[faixa] || faixa}
+- Preferred style: ${estilo}
+
+Please create a personalized learning journey that includes:
+
+1. A Weekly Creative Mission — one inspiring, achievable project
+2. Daily Micro-Practices — small actions (fitting their time budget) that build momentum
+3. A Reflection Prompt — a question to deepen their connection with the practice
+4. A Breakthrough Challenge — something slightly outside their comfort zone
+5. A Playful Experiment — an exercise with no "right" outcome, just exploration
+
+Tone: warm, encouraging, human.`},
+      {tool:'Midjourney',icon:'🎨',color:'from-purple-400 to-pink-500',text:`/imagine prompt: A visual representation of a creative learning journey at ${labels[nivel] || nivel} level — artistic style, ${estilo} approach, showing growth and discovery — soft gradients, ethereal atmosphere, warm lighting, organic forms blending with technological elements — cinematic composition, dreamlike quality — inspired by nature meets future creativity — 8K resolution, emotional, inspiring, peaceful yet dynamic — aspect ratio 16:9 --ar 16:9 --v 6.0 --s 750
+
+Alternative: A person surrounded by floating creative tools and glowing particles, representing the ${objLabels[objetivo] || objetivo} goal — fantasy realism, magical atmosphere, warm color palette — depth of field, volumetric lighting --ar 16:9 --v 6.0 --s 500`}
+    ];
+
+    loading.classList.add('hidden');
+    results.innerHTML=`
+      <div class="prompts-header reveal"><h3 style="font-size:1.5rem;font-weight:700;margin-bottom:8px">Seus <span class="text-gradient">prompts</span> estão prontos</h3><p style="color:var(--gray-400)">Copie e cole na ferramenta desejada para começar sua jornada.</p></div>
+      <div class="prompts-grid">${prompts.map((p,i)=>`
+        <div class="prompt-result-card reveal" style="transition-delay:${i*0.1}s">
+          <div class="prompt-result-header" style="background:linear-gradient(135deg,${p.color})">
+            <div class="prompt-result-info"><span class="prompt-result-icon">${p.icon}</span><span class="prompt-result-name">${p.tool}</span></div>
+            <button class="copy-btn" onclick="copyPrompt(this,'${p.tool}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button>
+          </div>
+          <div class="prompt-result-body"><pre>${escapeHtml(p.text)}</pre></div>
+        </div>
+      `).join('')}</div>
+      <div class="regenerate-container reveal">
+        <button class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px" onclick="generatePrompts()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Gerar Novamente
+        </button>
+      </div>
+    `;
+    results.classList.remove('hidden');
+    document.querySelectorAll('#prompts-results .reveal').forEach(el=>observer.observe(el));
+  },1500);
+}
+
+function escapeHtml(text){
+  const d=document.createElement('div');d.textContent=text;return d.innerHTML;
+}
+
+function copyPrompt(btn,toolName){
+  const card=btn.closest('.prompt-result-card');
+  const text=card.querySelector('pre').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copiado!</span>';
+    setTimeout(()=>{btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span>';},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>Copiado!</span>';
+    setTimeout(()=>{btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span>';},2000);
+  });
+}
+</script>
+</body>
+</html>
